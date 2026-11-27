@@ -2,6 +2,7 @@
 
 import pytest
 
+from finrag.sample_data import SAMPLE_ALIAS_TAG, delete_sample_data
 from finrag.tools import get_fact, search_filings
 
 pytestmark = pytest.mark.db
@@ -16,7 +17,7 @@ def test_get_fact_returns_stored_value(sample_db):
 
 
 def test_get_fact_maps_alias_to_concept(sample_db):
-    assert len(get_fact("SampleCo", "Revenues", 2099)["rows"]) == 1
+    assert len(get_fact("SampleCo", SAMPLE_ALIAS_TAG, 2099)["rows"]) == 1
 
 
 def test_get_fact_lists_available_concepts_when_missing(sample_db):
@@ -59,3 +60,27 @@ def test_search_clamps_k(sample_db, k, expected):
     # Only 3 chunks exist, so k above 3 returns 3.
     chunks = search_filings("revenue supply capital", company="SampleCo", k=k)["chunks"]
     assert len(chunks) == expected
+
+
+def _alias_count(conn, raw_tag):
+    return conn.execute(
+        "select count(*) as n from concept_aliases where raw_tag = %s", (raw_tag,)
+    ).fetchone()["n"]
+
+
+def test_sample_cleanup_keeps_real_aliases(sample_db):
+    """Regression: cleanup once deleted the alias of the real XBRL tag "Revenues"."""
+    sample_db.execute(
+        "insert into concept_aliases (raw_tag, concept) values ('Revenues', 'revenue')"
+    )
+    try:
+        delete_sample_data(sample_db, "TEST-NO-SUCH-FILING", "pytest-cleanup-check")
+        assert _alias_count(sample_db, "Revenues") == 1
+        assert _alias_count(sample_db, SAMPLE_ALIAS_TAG) == 0
+    finally:
+        sample_db.execute("delete from concept_aliases where raw_tag = 'Revenues'")
+        sample_db.execute(  # restore the shared sample alias for the other tests
+            "insert into concept_aliases (raw_tag, concept) values (%s, 'revenue') "
+            "on conflict do nothing",
+            (SAMPLE_ALIAS_TAG,),
+        )

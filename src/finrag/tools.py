@@ -4,6 +4,11 @@ get_fact       looks up a stored number (structured data).
 search_filings searches document text (hybrid keyword + vector search).
 """
 
+from typing import Any
+
+import psycopg
+from psycopg.rows import DictRow
+
 from .db import connect
 from .embed import embed_query
 
@@ -12,7 +17,7 @@ RRF_K = 60
 TEXT_LIMIT = 1500  # characters of chunk text returned to the model
 
 
-def _normalize_concept(conn, concept: str) -> str:
+def _normalize_concept(conn: psycopg.Connection[DictRow], concept: str) -> str:
     """Map a raw tag or free text to the normalized concept name."""
     row = conn.execute(
         "select concept from concept_aliases where lower(raw_tag) = lower(%(c)s)",
@@ -23,7 +28,7 @@ def _normalize_concept(conn, concept: str) -> str:
     return concept.strip().lower().replace(" ", "_")
 
 
-def get_fact(company: str, concept: str, fiscal_year: int) -> dict:
+def get_fact(company: str, concept: str, fiscal_year: int) -> dict[str, Any]:
     """Return stored values for one company, concept and fiscal year.
 
     If nothing matches, return the concepts that do exist for that company and
@@ -106,7 +111,7 @@ def search_filings(
     company: str | None = None,
     fiscal_year: int | None = None,
     k: int = 5,
-) -> dict:
+) -> dict[str, Any]:
     """Hybrid search over document chunks. Returns the top k chunks with sources."""
     k = max(1, min(int(k), 20))
     with connect() as conn:

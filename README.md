@@ -24,8 +24,8 @@ written to an audit table.
 
 ## Setup
 
-Requirements: Python 3.10 or later (CI uses 3.12). The Python that ships with the macOS
-Command Line Tools is 3.9 and does not work. Node.js is needed only for the Neon CLI.
+Requirements: Python 3.12 or later (the pinned numpy needs it; CI uses 3.12). The Python that
+ships with the macOS Command Line Tools is 3.9 and does not work. Node.js is needed only for the Neon CLI.
 
 1. Link the Neon project and write its environment variables to `.env`
    (see [ADR 0004](docs/adr/0004-neon-cli-config.md)):
@@ -84,10 +84,11 @@ PYTHONPATH=src python -m finrag.agent "What was SampleCo revenue in 2099?"
 ```
 pip install -r requirements-dev.txt
 pre-commit install          # run format, lint and secret checks before each commit
-ruff check . && ruff format --check .
-mypy
-pytest                      # database tests run only on TEST_DATABASE_URL (the 'test' branch)
+make check                  # lint, format check, mypy --strict, tests with coverage
 ```
+
+`make check` runs `make lint`, `make typecheck` and `make test`. Database tests run only on
+`TEST_DATABASE_URL` (the Neon `test` branch) and are skipped when it is not set.
 
 GitHub Actions (`.github/workflows/ci.yml`) runs the same checks on every push, with a
 PostgreSQL + pgvector service container. Rules for AI assistants are in `CLAUDE.md`.

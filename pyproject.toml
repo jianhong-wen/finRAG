@@ -2,27 +2,30 @@
 name = "finrag"
 version = "0.1.0"
 description = "Finance RAG: document search and structured facts in one PostgreSQL database"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py312"
 src = ["src", "scripts", "tests"]
 
 [tool.ruff.lint]
-# E/F: errors, I: import order, B: likely bugs, UP: modern syntax, S: security checks
-select = ["E", "F", "I", "B", "UP", "S"]
+# E/F: errors, I: import order, B: likely bugs, UP: modern syntax, S: security checks,
+# C90: cyclomatic complexity, D101-D103: docstrings on public classes, methods, functions
+select = ["E", "F", "I", "B", "UP", "S", "C90", "D101", "D102", "D103"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["S101"]  # assert is expected in tests
+"tests/*" = ["S101", "D"]  # assert is expected in tests; test names describe the behavior
+"exploration/*" = ["D"]  # archived exploration scripts, not project code
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.12"
 mypy_path = "src"
 packages = ["finrag"]
-warn_unused_ignores = true
-warn_return_any = true
-check_untyped_defs = true
+strict = true
 
 [[tool.mypy.overrides]]
 module = ["pgvector.*", "fastembed.*"]
@@ -31,4 +34,11 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-markers = ["db: needs a PostgreSQL database with pgvector (DATABASE_URL)"]
+markers = ["db: needs a PostgreSQL database with pgvector (TEST_DATABASE_URL)"]
+
+[tool.coverage.run]
+source = ["src/finrag"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
