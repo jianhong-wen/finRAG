@@ -35,3 +35,4 @@ and that the vector dimension in the schema, the config, and an accepted ADR agr
 | [0002](0002-embedding-384.md) | 384-dimension embeddings (BAAI/bge-small-en-v1.5) | accepted | 2026-11-27 |
 | [0003](0003-fixed-sql-tools.md) | Fixed, parameterized SQL tools instead of model-written SQL | accepted | 2026-11-27 |
 | [0004](0004-neon-cli-config.md) | Manage the Neon project with the Neon CLI and neon.ts | accepted | 2026-11-27 |
+| [0005](0005-neon-environments.md) | Production, development and test as Neon branches | accepted | 2026-11-27 |

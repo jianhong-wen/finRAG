@@ -1,6 +1,7 @@
 """Settings read from environment variables (and from a local .env file)."""
 
 import os
+from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 
@@ -19,3 +20,18 @@ def database_url() -> str:
             "DATABASE_URL is not set. Copy .env.example to .env and add your connection string."
         )
     return url
+
+
+def describe_database(url: str) -> str:
+    """Name the database a URL points to, without the user name or password.
+
+    For Neon this is the endpoint id, which identifies the branch, for example
+    "ep-dawn-pond-behjjail (pooled), database neondb".
+    """
+    parts = urlsplit(url)
+    host = parts.hostname or "unknown host"
+    first = host.split(".")[0]
+    pooled = first.endswith("-pooler")
+    endpoint = first.removesuffix("-pooler") if "neon.tech" in host else host
+    database = parts.path.lstrip("/") or "default"
+    return f"{endpoint}{' (pooled)' if pooled else ''}, database {database}"

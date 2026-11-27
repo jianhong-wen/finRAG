@@ -25,7 +25,8 @@ jobs:
           --health-timeout 5s
           --health-retries 10
     env:
-      DATABASE_URL: postgresql://finrag:ci-only-password@localhost:5432/finrag_test
+      # Database tests use TEST_DATABASE_URL only (ADR 0005).
+      TEST_DATABASE_URL: postgresql://finrag:ci-only-password@localhost:5432/finrag_test
       EMBED_BACKEND: hash
     steps:
       - uses: actions/checkout@v6

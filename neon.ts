@@ -1,5 +1,8 @@
 import { defineConfig } from "@neon/config/v1";
 
+// Environments (ADR 0005): production is the default branch; these two persist.
+const LONG_LIVED = ["development", "test"];
+
 export default defineConfig({
   // Declare your Neon services here
   auth: false,
@@ -7,6 +10,10 @@ export default defineConfig({
   branch: (branch) => {
     if (branch.isDefault) {
       // Default branch: no overrides, uses project defaults
+      return {};
+    }
+    if (LONG_LIVED.includes(branch.name)) {
+      // Long-lived environments (ADR 0005): never expire
       return {};
     }
     if (!branch.exists) {
