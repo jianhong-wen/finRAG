@@ -13,6 +13,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from finrag.agent import run_tool  # noqa: E402
+from finrag.config import database_url, describe_database  # noqa: E402
 from finrag.db import apply_schema, connect  # noqa: E402
 from finrag.embed import embed_documents  # noqa: E402
 from finrag.tools import get_fact, search_filings  # noqa: E402
@@ -50,6 +51,7 @@ def cleanup(conn) -> None:
 
 
 def main() -> int:
+    print(f"Target: {describe_database(database_url())}")
     tables = apply_schema()
     check(
         "schema applied",

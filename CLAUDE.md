@@ -16,6 +16,25 @@ in one PostgreSQL + pgvector database. See README.md for setup.
 - Type check: `mypy`
 - Test: `pytest` (database tests need DATABASE_URL; they are skipped without it)
 
+## Environments (ADR 0005)
+Three Neon branches in one project. CI uses its own PostgreSQL container.
+
+| Branch | Variable | Used for |
+|---|---|---|
+| `production` (default) | none in `.env` | Loaded filings, evaluation, demo |
+| `development` | `DATABASE_URL` | Daily work, scripts, the agent |
+| `test` | `TEST_DATABASE_URL` | Database tests, synthetic data only |
+
+- Do not point `DATABASE_URL` or `TEST_DATABASE_URL` at `production`.
+- Write to `production` only when the user asks for it in the current conversation,
+  and name the target explicitly in the command.
+- Database tests use only `TEST_DATABASE_URL`. Do not remove or weaken the guards in
+  `tests/_db_guard.py` and the `sample_db` fixture.
+- Variables exported in the shell override `.env` (`load_dotenv` does not overwrite them).
+  Before trusting a database result, check the `Target:` line that `init_db.py` and
+  `check_setup.py` print.
+- To name a database in output, use `describe_database()` (endpoint id only), never the URL.
+
 ## Definition of done
 A change is done only when lint, type check, and all tests pass.
 - Report the actual command output. Do not say that checks passed without running them.

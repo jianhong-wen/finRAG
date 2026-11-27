@@ -19,6 +19,7 @@ written to an audit table.
 | Agent loop with audit logging | Tested with a mocked model response |
 | Embedding model (fastembed) | Tested on macOS with Python 3.12 (2026-11-27) |
 | Neon database | Tested: `check_setup.py` 9 of 9 checks, `pytest` 25 passed (2026-11-27) |
+| Neon environments | Tested: `check_setup.py` 9 of 9 on `development`, `pytest` 32 passed with database tests on `test` (2026-11-27) |
 | Ingestion of real filings | Not built yet |
 
 ## Setup
@@ -40,6 +41,20 @@ Command Line Tools is 3.9 and does not work. Node.js is needed only for the Neon
    The free plan has 1 GB of storage per project, and compute stops after 5 minutes without use.
    Never commit `.env` or paste the connection string into a chat.
    Add `ANTHROPIC_API_KEY` to `.env` by hand if you want to run the agent.
+
+   Then point `.env` at the development and test branches
+   (see [ADR 0005](docs/adr/0005-neon-environments.md)):
+
+   ```
+   neon checkout development   # writes DATABASE_URL for the development branch
+   printf 'TEST_DATABASE_URL="%s"\n' "$(neon cs test --pooled)" >> .env
+   ```
+
+   | Branch | Used by | Variable |
+   |---|---|---|
+   | `production` | Loading scripts and evaluation, only when named explicitly | none in `.env` |
+   | `development` | Daily work, `check_setup.py`, the agent | `DATABASE_URL` |
+   | `test` | Database tests (synthetic data only) | `TEST_DATABASE_URL` |
 2. Install the dependencies:
 
    ```
@@ -71,9 +86,7 @@ pip install -r requirements-dev.txt
 pre-commit install          # run format, lint and secret checks before each commit
 ruff check . && ruff format --check .
 mypy
-pytest                      # database tests are skipped when DATABASE_URL is not set
-set -a; source .env; set +a  # export DATABASE_URL so the database tests run
-pytest
+pytest                      # database tests run only on TEST_DATABASE_URL (the 'test' branch)
 ```
 
 GitHub Actions (`.github/workflows/ci.yml`) runs the same checks on every push, with a
