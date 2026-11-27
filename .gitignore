@@ -9,3 +9,4 @@ data/
 .neon
 node_modules/
 CLAUDE.local.md
+.coverage

@@ -74,7 +74,7 @@ _IMPLEMENTATIONS: dict[str, Callable[..., dict[str, Any]]] = {
 }
 
 
-def _summarize(tool: str, output: dict) -> dict:
+def _summarize(tool: str, output: dict[str, Any]) -> dict[str, Any]:
     if tool == "get_fact":
         return {
             "rows": len(output["rows"]),
@@ -83,7 +83,9 @@ def _summarize(tool: str, output: dict) -> dict:
     return {"chunks": [c["chunk_id"] for c in output["chunks"]]}
 
 
-def _log(question: str, tool: str, tool_input: dict, summary: dict, ms: int) -> None:
+def _log(
+    question: str, tool: str, tool_input: dict[str, Any], summary: dict[str, Any], ms: int
+) -> None:
     with connect(register_vectors=False) as conn:
         conn.execute(
             "insert into audit_log (question, tool, input, output_summary, latency_ms) "
@@ -92,7 +94,11 @@ def _log(question: str, tool: str, tool_input: dict, summary: dict, ms: int) -> 
         )
 
 
-def run_tool(question: str, name: str, tool_input: dict) -> dict:
+def run_tool(question: str, name: str, tool_input: dict[str, Any]) -> dict[str, Any]:
+    """Run one tool, write one audit_log row, and return the tool output.
+
+    A tool error is returned as {"error": message} so the model can react to it.
+    """
     start = time.perf_counter()
     try:
         output = _IMPLEMENTATIONS[name](**tool_input)
@@ -103,10 +109,15 @@ def run_tool(question: str, name: str, tool_input: dict) -> dict:
     return output
 
 
-def answer(question: str) -> tuple[str, list[dict]]:
+def answer(question: str) -> tuple[str, list[dict[str, Any]]]:
+    """Answer a question with the tool-calling loop.
+
+    Returns the final text and the evidence (each tool call with its output).
+    Raises RuntimeError if there is no final answer after MAX_TOOL_ROUNDS rounds.
+    """
     client = anthropic.Anthropic()
     messages: list[MessageParam] = [{"role": "user", "content": question}]
-    evidence: list[dict] = []
+    evidence: list[dict[str, Any]] = []
     for _ in range(MAX_TOOL_ROUNDS):
         reply = client.messages.create(
             model=MODEL, max_tokens=1500, system=SYSTEM, tools=TOOLS, messages=messages

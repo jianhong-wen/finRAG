@@ -1,6 +1,7 @@
-psycopg[binary]>=3.2
-pgvector>=0.3
-numpy
-python-dotenv
-fastembed
-anthropic
+# Direct dependencies, pinned to the versions tested on 2026-11-27 (Python 3.12).
+psycopg[binary]==3.3.9
+pgvector==0.5.1
+numpy==2.5.5
+python-dotenv==1.2.4
+fastembed==0.9.1
+anthropic==2.14.0

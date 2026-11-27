@@ -36,8 +36,8 @@ jobs:
           cache: pip
       - run: pip install -r requirements-dev.txt
       - name: Lint
-        run: ruff check . && ruff format --check .
+        run: make lint
       - name: Type check
-        run: mypy
+        run: make typecheck
       - name: Tests
-        run: pytest -q
+        run: make test

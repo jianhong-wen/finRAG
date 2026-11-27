@@ -11,10 +11,11 @@ in one PostgreSQL + pgvector database. See README.md for setup.
 - `docs/adr/`: architecture decision records.
 
 ## Commands
-- Install: `pip install -r requirements-dev.txt`
+- Install: `pip install -r requirements-dev.txt` (Python 3.12 or later)
+- All checks: `make check` (= `make lint`, `make typecheck`, `make test`)
 - Lint: `ruff check . && ruff format --check .`
-- Type check: `mypy`
-- Test: `pytest` (database tests need DATABASE_URL; they are skipped without it)
+- Type check: `mypy` (strict mode)
+- Test: `pytest --cov` (database tests need TEST_DATABASE_URL; they are skipped without it)
 
 ## Environments (ADR 0005)
 Three Neon branches in one project. CI uses its own PostgreSQL container.
@@ -36,13 +37,28 @@ Three Neon branches in one project. CI uses its own PostgreSQL container.
 - To name a database in output, use `describe_database()` (endpoint id only), never the URL.
 
 ## Definition of done
-A change is done only when lint, type check, and all tests pass.
+A change is done only when `make check` passes.
 - Report the actual command output. Do not say that checks passed without running them.
 - Do not delete, skip, or weaken a failing test to make it pass. If a test is wrong, say why.
 - Every behavior change needs a new or updated test.
 - If a check could not be run (for example no database), say so explicitly.
 - Before finishing, state whether the change needs an ADR or a `docs/decision-log.md` entry
   (criteria in `docs/adr/README.md`), and write it in the same change if so.
+
+## Code standards
+ruff (including complexity <= 10 and docstrings), `mypy --strict` and coverage are enforced
+by `make check`. These rules are not checked by tools:
+- One responsibility per module (about 400 lines at most) and per function (about 40 lines).
+- Keep pure logic apart from database, file, network and model calls, so it can be tested.
+- Fail loudly: validate inputs at module boundaries, raise specific errors, never swallow an
+  exception. Missing data is reported as missing, never treated as success.
+- Network and model calls (SEC EDGAR, Anthropic) have a timeout and a bounded number of retries.
+- Evaluation output is deterministic: sorted results, fixed random seeds.
+- Files under `data/` are written to a temporary file first, then moved into place.
+- Pin new dependencies to an exact version in `requirements*.txt`.
+- Code describes current behavior only. Dates, experiment ids and change history belong in
+  commit messages, ADRs or `docs/decision-log.md`.
+- Every bug fix includes a test that fails before the fix.
 
 ## Rules
 - SQL uses parameters (`%s` or `%(name)s`). Never build SQL by string formatting with input values.

@@ -14,6 +14,7 @@ MAX_TOOL_ROUNDS = 8
 
 
 def database_url() -> str:
+    """Return DATABASE_URL. Raise RuntimeError if it is not set."""
     url = os.environ.get("DATABASE_URL")
     if not url:
         raise RuntimeError(
