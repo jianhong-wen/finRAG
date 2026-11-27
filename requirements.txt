@@ -1,0 +1,6 @@
+psycopg[binary]>=3.2
+pgvector>=0.3
+numpy
+python-dotenv
+fastembed
+anthropic
