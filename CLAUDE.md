@@ -22,6 +22,8 @@ A change is done only when lint, type check, and all tests pass.
 - Do not delete, skip, or weaken a failing test to make it pass. If a test is wrong, say why.
 - Every behavior change needs a new or updated test.
 - If a check could not be run (for example no database), say so explicitly.
+- Before finishing, state whether the change needs an ADR or a `docs/decision-log.md` entry
+  (criteria in `docs/adr/README.md`), and write it in the same change if so.
 
 ## Rules
 - SQL uses parameters (`%s` or `%(name)s`). Never build SQL by string formatting with input values.

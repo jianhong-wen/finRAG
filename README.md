@@ -17,29 +17,37 @@ written to an audit table.
 | Schema (`sql/schema.sql`) | Tested on PostgreSQL 16 with pgvector 0.6.0 |
 | Tools `get_fact` and `search_filings` | Tested with synthetic data (`scripts/check_setup.py`) |
 | Agent loop with audit logging | Tested with a mocked model response |
-| Embedding model (fastembed) | Not tested yet. It downloads a model on first use |
-| Neon database | Not tested yet |
+| Embedding model (fastembed) | Tested on macOS with Python 3.12 (2026-11-27) |
+| Neon database | Tested: `check_setup.py` 9 of 9 checks, `pytest` 25 passed (2026-11-27) |
 | Ingestion of real filings | Not built yet |
 
 ## Setup
 
-1. Create a free Neon project and copy its connection string from the Neon dashboard.
+Requirements: Python 3.10 or later (CI uses 3.12). The Python that ships with the macOS
+Command Line Tools is 3.9 and does not work. Node.js is needed only for the Neon CLI.
+
+1. Link the Neon project and write its environment variables to `.env`
+   (see [ADR 0004](docs/adr/0004-neon-cli-config.md)):
+
+   ```
+   npm i -g neon@latest        # or use npx neon@latest
+   neon login
+   touch .env                  # neon deploy writes to .env only if it exists
+   neon init -y --org-id <org-id> --project-id <project-id> --branch production --services postgres
+   neon deploy
+   ```
+
    The free plan has 1 GB of storage per project, and compute stops after 5 minutes without use.
-2. Create the environment file and add the connection string:
+   Never commit `.env` or paste the connection string into a chat.
+   Add `ANTHROPIC_API_KEY` to `.env` by hand if you want to run the agent.
+2. Install the dependencies:
 
    ```
-   cp .env.example .env
-   ```
-
-   Edit `.env`. Never commit this file or paste the connection string into a chat.
-3. Install the dependencies:
-
-   ```
-   python3 -m venv .venv
+   python3.12 -m venv .venv
    source .venv/bin/activate
    pip install -r requirements.txt
    ```
-4. Create the tables and run the self-check:
+3. Create the tables and run the self-check:
 
    ```
    python scripts/init_db.py
@@ -64,6 +72,8 @@ pre-commit install          # run format, lint and secret checks before each com
 ruff check . && ruff format --check .
 mypy
 pytest                      # database tests are skipped when DATABASE_URL is not set
+set -a; source .env; set +a  # export DATABASE_URL so the database tests run
+pytest
 ```
 
 GitHub Actions (`.github/workflows/ci.yml`) runs the same checks on every push, with a

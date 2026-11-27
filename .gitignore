@@ -4,3 +4,7 @@ __pycache__/
 *.pyc
 data/
 .DS_Store
+.mypy_cache/
+.env.local
+.neon
+node_modules/
