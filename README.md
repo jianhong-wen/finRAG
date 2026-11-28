@@ -21,7 +21,7 @@ written to an audit table.
 | Neon database | Tested: `check_setup.py` 9 of 9 checks, `pytest` 25 passed (2026-11-27) |
 | Neon environments | Tested: `check_setup.py` 9 of 9 on `development`, `pytest` 32 passed with database tests on `test` (2026-11-27) |
 | FinanceBench subset | Manifest for 5 companies, 39 questions, 17 PDFs; files verified by SHA-256 |
-| Ingestion of real filings | Not built yet |
+| PDF ingestion (`scripts/ingest.py`) | Built and tested with synthetic PDFs; not yet run on the 17 filings |
 
 ## Setup
 
@@ -93,7 +93,13 @@ Question text and PDFs are not committed. To download them to `data/financebench
 
 ```
 python scripts/financebench.py fetch
+python scripts/ingest.py            # loads the PDFs into the development branch
 ```
+
+`ingest.py` extracts text with pypdfium2, splits each page into chunks of at most 350 tokens
+that never span two pages, embeds them, and skips filings whose PDF and pipeline are
+unchanged ([ADR 0007](docs/adr/0007-pdf-parsing-and-chunking.md)). Writing to production
+needs `--target production` and `PRODUCTION_DATABASE_URL`.
 
 | Company | Questions | Documents |
 |---|---|---|
@@ -138,8 +144,7 @@ Design decisions are recorded in `docs/adr/`.
 
 ## Next steps
 
-1. Load the 17 subset PDFs: parsing with page numbers, chunking, and embedding (step 3).
-2. Measure retrieval on the 39 subset questions: BM25, vector, and hybrid baselines (step 4).
-3. Load XBRL facts for the five companies (step 5).
-4. Add a cross-encoder reranker after the RRF step.
-5. Evaluate on all 150 FinanceBench questions: PDF only, facts only, and combined.
+1. Measure retrieval on the 39 subset questions: BM25, vector, and hybrid baselines (step 4).
+2. Load XBRL facts for the five companies (step 5).
+3. Add a cross-encoder reranker after the RRF step.
+4. Evaluate on all 150 FinanceBench questions: PDF only, facts only, and combined.

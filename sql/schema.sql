@@ -14,6 +14,10 @@ create table if not exists filings (
   source_url  text,
   ingested_at timestamptz not null default now()
 );
+-- Added for idempotent loading (ADR 0007): a document is reloaded only when its file
+-- or the processing pipeline changes.
+alter table filings add column if not exists source_sha256 text;
+alter table filings add column if not exists pipeline_version text;
 
 -- Maps raw reporting tags (for example XBRL tags) to one normalized concept name.
 create table if not exists concept_aliases (

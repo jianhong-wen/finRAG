@@ -28,7 +28,7 @@ packages = ["finrag"]
 strict = true
 
 [[tool.mypy.overrides]]
-module = ["pgvector.*", "fastembed.*"]
+module = ["pgvector.*", "fastembed.*", "pypdfium2.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
