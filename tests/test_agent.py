@@ -77,3 +77,9 @@ def test_round_limit_stops_the_loop(sample_db, monkeypatch):
     monkeypatch.setattr(agent.anthropic, "Anthropic", _fake_client(LoopingMessages()))
     with pytest.raises(RuntimeError, match="tool rounds"):
         agent.answer(AUDIT_TAG)
+
+
+def test_search_tool_asks_for_company_and_fiscal_year_filters():
+    search = next(t for t in agent.TOOLS if t["name"] == "search_filings")
+    assert "fiscal_year" in search["description"]
+    assert "Every number in your answer must come from" in agent.SYSTEM

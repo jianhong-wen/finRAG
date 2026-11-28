@@ -46,6 +46,18 @@ A change is done only when `make check` passes.
 - Before finishing, state whether the change needs an ADR or a `docs/decision-log.md` entry
   (criteria in `docs/adr/README.md`), and write it in the same change if so.
 
+## Evaluation integrity
+- Every input that an evaluation gives to the system under test must be available when a
+  user asks the question. Labels (answers, evidence pages, document names, company or
+  fiscal-year metadata) may be used only to score results, never to build queries,
+  filters or prompts. Using them otherwise leaks information and inflates results.
+- Wherever an evaluation uses label information, state in the code, the result file and
+  the report whether that information is available at question time. A run that uses
+  labels on purpose (an upper bound) must be named as such, for example scope `oracle`,
+  and must not be the basis of a design decision.
+- Disclose any setting chosen while looking at the evaluation questions (for example an
+  alias list or a threshold), because it makes results optimistic.
+
 ## Code standards
 ruff (including complexity <= 10 and docstrings), `mypy --strict` and coverage are enforced
 by `make check`. These rules are not checked by tools:

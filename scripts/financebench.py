@@ -18,6 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from finrag.fileio import write_atomic  # noqa: E402
 from finrag.financebench import (  # noqa: E402
     DOCUMENTS_PATH,
     QUESTIONS_PATH,
@@ -30,7 +31,6 @@ from finrag.financebench import (  # noqa: E402
     raw_url,
     select_subset,
     sha256_hex,
-    write_atomic,
 )
 from finrag.financebench import build_manifest as build  # noqa: E402
 

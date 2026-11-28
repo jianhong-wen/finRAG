@@ -22,6 +22,7 @@ written to an audit table.
 | Neon environments | Tested: `check_setup.py` 9 of 9 on `development`, `pytest` 32 passed with database tests on `test` (2026-11-27) |
 | FinanceBench subset | Manifest for 5 companies, 39 questions, 17 PDFs; files verified by SHA-256 |
 | PDF ingestion (`scripts/ingest.py`) | 17 filings loaded into `development` (2026-11-27): 8,717 chunks; all 39 evidence pages of the subset have chunks; a second run skips all 17 |
+| Retrieval evaluation (`scripts/evaluate_retrieval.py`) | Baseline on 39 questions (2026-11-28); agent uses `vector` ([ADR 0009](docs/adr/0009-agent-retrieval-mode.md)) |
 
 ## Setup
 
@@ -109,6 +110,28 @@ needs `--target production` and `PRODUCTION_DATABASE_URL`.
 | 3M | 8 | 3 |
 | Best Buy | 8 | 4 |
 
+## Results
+
+Retrieval baseline on the 39 subset questions (`results/retrieval/2026-11-28.json`).
+A hit is a retrieved chunk on an evidence page; R@k is the share of questions with a hit
+in the top k, and MRR is the mean of 1/rank of the first hit. Filters are the company and
+year read from the question text, which is what is available when a user asks.
+
+| Mode | R@1 | R@5 | R@20 | MRR |
+|---|---|---|---|---|
+| Keyword, all words (`keyword_and`) | 0.000 | 0.000 | 0.000 | 0.000 |
+| Keyword, any word (`keyword_or`) | 0.128 | 0.179 | 0.359 | 0.166 |
+| Vector (`vector`, agent setting) | 0.154 | 0.385 | 0.590 | 0.276 |
+| Hybrid, all words (`hybrid_and`, previous agent setting) | 0.128 | 0.385 | 0.590 | 0.263 |
+| Hybrid, any word (`hybrid_or`) | 0.256 | 0.333 | 0.513 | 0.299 |
+
+Without filters, vector search reaches R@5 0.282. With the FinanceBench labels as filters
+(an upper bound that a user cannot supply), it reaches 0.436. With 39 questions,
+differences of a few questions are not statistically significant. The right document is
+in the top 5 for over 90% of questions; the right page is the hard part. Reproduce with
+`python scripts/evaluate_retrieval.py` (reads the development branch only). See
+[ADR 0009](docs/adr/0009-agent-retrieval-mode.md).
+
 ## Development
 
 ```
@@ -144,7 +167,6 @@ Design decisions are recorded in `docs/adr/`.
 
 ## Next steps
 
-1. Measure retrieval on the 39 subset questions: BM25, vector, and hybrid baselines (step 4).
-2. Load XBRL facts for the five companies (step 5).
-3. Add a cross-encoder reranker after the RRF step.
-4. Evaluate on all 150 FinanceBench questions: PDF only, facts only, and combined.
+1. Load XBRL facts for the five companies (step 5).
+2. Add a cross-encoder reranker after the RRF step.
+3. Evaluate on all 150 FinanceBench questions: PDF only, facts only, and combined.

@@ -39,3 +39,4 @@ and that the vector dimension in the schema, the config, and an accepted ADR agr
 | [0006](0006-financebench-subset.md) | FinanceBench subset from the GitHub repository at a pinned commit | accepted | 2026-11-27 |
 | [0007](0007-pdf-parsing-and-chunking.md) | PDF text with pypdfium2, page-bounded chunks, idempotent loading | accepted | 2026-11-27 |
 | [0008](0008-agent-runtime-and-llm-provider.md) | Own agent loop on the Anthropic SDK; AMD Radeon Cloud as the model provider | accepted | 2026-11-27 |
+| [0009](0009-agent-retrieval-mode.md) | Agent retrieval uses vector search; evaluation scopes without label leakage | accepted | 2026-11-27 |
