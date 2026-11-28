@@ -1,0 +1,511 @@
+{
+  "source": {
+    "repository": "https://github.com/patronus-ai/financebench",
+    "commit": "cc39aeb4afdf33909ee1412188bf89035950c2eb",
+    "license": "CC-BY-NC-4.0 (Hugging Face dataset card); the GitHub repository has no license file",
+    "paper": "https://arxiv.org/abs/2311.11944",
+    "retrieved": "2026-11-28"
+  },
+  "companies": [
+    "3M",
+    "American Express",
+    "Best Buy",
+    "JPMorgan",
+    "PepsiCo"
+  ],
+  "metadata_files": [
+    {
+      "path": "data/financebench_open_source.jsonl",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/data/financebench_open_source.jsonl",
+      "sha256": "a5a2aa673e573e55675fc3c0f9aa38c1cf59d2abc91edb077534f71f10a71877",
+      "bytes": 929848
+    },
+    {
+      "path": "data/financebench_document_information.jsonl",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/data/financebench_document_information.jsonl",
+      "sha256": "1c69127783879de8cdadb159d2181f39bc3123b8e0ebf74031c3969d69189575",
+      "bytes": 88781
+    }
+  ],
+  "questions": [
+    {
+      "financebench_id": "financebench_id_00206",
+      "company": "JPMorgan",
+      "doc_name": "JPMORGAN_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Logical reasoning (based on numerical reasoning) OR Logical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_00288",
+      "company": "Best Buy",
+      "doc_name": "BESTBUY_2024Q2_10Q",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_00299",
+      "company": "JPMorgan",
+      "doc_name": "JPMORGAN_2021Q1_10Q",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_00394",
+      "company": "JPMorgan",
+      "doc_name": "JPMORGAN_2022Q2_10Q",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_00460",
+      "company": "Best Buy",
+      "doc_name": "BESTBUY_2024Q2_10Q",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_00476",
+      "company": "American Express",
+      "doc_name": "AMERICANEXPRESS_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_00499",
+      "company": "3M",
+      "doc_name": "3M_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Logical reasoning (based on numerical reasoning)"
+    },
+    {
+      "financebench_id": "financebench_id_00685",
+      "company": "Best Buy",
+      "doc_name": "BESTBUY_2023_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Logical reasoning (based on numerical reasoning) OR Logical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_00705",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2023_8K_dated-2023-05-30",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_00720",
+      "company": "American Express",
+      "doc_name": "AMERICANEXPRESS_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Logical reasoning (based on numerical reasoning) OR Numerical reasoning OR Logical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_00723",
+      "company": "American Express",
+      "doc_name": "AMERICANEXPRESS_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Numerical reasoning OR information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_00735",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_00807",
+      "company": "3M",
+      "doc_name": "3M_2023Q2_10Q",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Logical reasoning (based on numerical reasoning) OR Logical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_00882",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2023_8K_dated-2023-05-30",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_00941",
+      "company": "3M",
+      "doc_name": "3M_2023Q2_10Q",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_01009",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_01028",
+      "company": "American Express",
+      "doc_name": "AMERICANEXPRESS_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_01077",
+      "company": "Best Buy",
+      "doc_name": "BESTBUY_2023_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_01226",
+      "company": "3M",
+      "doc_name": "3M_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Logical reasoning (based on numerical reasoning) OR Numerical reasoning OR Logical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_01275",
+      "company": "Best Buy",
+      "doc_name": "BESTBUY_2023_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Numerical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_01328",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_01351",
+      "company": "American Express",
+      "doc_name": "AMERICANEXPRESS_2022_10K",
+      "question_type": "domain-relevant",
+      "question_reasoning": "Numerical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_01474",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2023Q1_EARNINGS",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_01476",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2023Q1_EARNINGS",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_01482",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2023_8K_dated-2023-05-05",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_01858",
+      "company": "3M",
+      "doc_name": "3M_2023Q2_10Q",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_01865",
+      "company": "3M",
+      "doc_name": "3M_2022_10K",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_01902",
+      "company": "Best Buy",
+      "doc_name": "BESTBUY_2024Q2_10Q",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_01964",
+      "company": "American Express",
+      "doc_name": "AMERICANEXPRESS_2022_10K",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_01981",
+      "company": "American Express",
+      "doc_name": "AMERICANEXPRESS_2022_10K",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_02049",
+      "company": "JPMorgan",
+      "doc_name": "JPMORGAN_2023Q2_10Q",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_02119",
+      "company": "JPMorgan",
+      "doc_name": "JPMORGAN_2021Q1_10Q",
+      "question_type": "novel-generated",
+      "question_reasoning": null
+    },
+    {
+      "financebench_id": "financebench_id_02608",
+      "company": "Best Buy",
+      "doc_name": "BESTBUY_2017_10K",
+      "question_type": "metrics-generated",
+      "question_reasoning": "Numerical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_03029",
+      "company": "3M",
+      "doc_name": "3M_2018_10K",
+      "question_type": "metrics-generated",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_03620",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2022_10K",
+      "question_type": "metrics-generated",
+      "question_reasoning": "Numerical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_04417",
+      "company": "Best Buy",
+      "doc_name": "BESTBUY_2019_10K",
+      "question_type": "metrics-generated",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_04481",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2022_10K",
+      "question_type": "metrics-generated",
+      "question_reasoning": "Numerical reasoning"
+    },
+    {
+      "financebench_id": "financebench_id_04672",
+      "company": "3M",
+      "doc_name": "3M_2018_10K",
+      "question_type": "metrics-generated",
+      "question_reasoning": "Information extraction"
+    },
+    {
+      "financebench_id": "financebench_id_04980",
+      "company": "PepsiCo",
+      "doc_name": "PEPSICO_2021_10K",
+      "question_type": "metrics-generated",
+      "question_reasoning": "Information extraction"
+    }
+  ],
+  "documents": [
+    {
+      "doc_name": "3M_2018_10K",
+      "company": "3M",
+      "gics_sector": "Industrials",
+      "doc_type": "10k",
+      "doc_period": 2018,
+      "original_doc_link": "https://investors.3m.com/financials/sec-filings/content/0001558370-19-000470/0001558370-19-000470.pdf",
+      "path": "pdfs/3M_2018_10K.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/3M_2018_10K.pdf",
+      "sha256": "faf10c53fc6f1a8aa346ec3db79145e3ae6fbb3753c8064924e174d0a973934d",
+      "bytes": 1252586
+    },
+    {
+      "doc_name": "3M_2022_10K",
+      "company": "3M",
+      "gics_sector": "Industrials",
+      "doc_type": "10k",
+      "doc_period": 2022,
+      "original_doc_link": "https://investors.3m.com/financials/sec-filings/content/0000066740-23-000014/0000066740-23-000014.pdf",
+      "path": "pdfs/3M_2022_10K.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/3M_2022_10K.pdf",
+      "sha256": "d5cf549543a24b04228fd2af979ff2ca94cf64fb008a789340cb9117fbcfde5d",
+      "bytes": 1655681
+    },
+    {
+      "doc_name": "3M_2023Q2_10Q",
+      "company": "3M",
+      "gics_sector": "Industrials",
+      "doc_type": "10q",
+      "doc_period": 2023,
+      "original_doc_link": "https://investors.3m.com/financials/sec-filings/content/0000066740-23-000058/0000066740-23-000058.pdf",
+      "path": "pdfs/3M_2023Q2_10Q.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/3M_2023Q2_10Q.pdf",
+      "sha256": "3e66115793459f42185feeeab4e7f07dd27ab6dd465d0694ce415e861029cf93",
+      "bytes": 5287301
+    },
+    {
+      "doc_name": "AMERICANEXPRESS_2022_10K",
+      "company": "American Express",
+      "gics_sector": "Financials",
+      "doc_type": "10k",
+      "doc_period": 2022,
+      "original_doc_link": "https://s26.q4cdn.com/747928648/files/doc_financials/2022/q4/AMEX-10K-4Q22.pdf",
+      "path": "pdfs/AMERICANEXPRESS_2022_10K.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/AMERICANEXPRESS_2022_10K.pdf",
+      "sha256": "d3bbc7ab23d6160e07eab50a359e4d68c40efff9fde3baa168e7c40e06f568e6",
+      "bytes": 2436166
+    },
+    {
+      "doc_name": "BESTBUY_2017_10K",
+      "company": "Best Buy",
+      "gics_sector": "Consumer Discretionary",
+      "doc_type": "10k",
+      "doc_period": 2017,
+      "original_doc_link": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000764478/47c2227c-aa33-4fe8-b14c-5f77bc63857e.pdf",
+      "path": "pdfs/BESTBUY_2017_10K.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/BESTBUY_2017_10K.pdf",
+      "sha256": "4570187fa697f252e08c8f99c409446fbcde05b08358851d34d4cb1c8bd1cec8",
+      "bytes": 776434
+    },
+    {
+      "doc_name": "BESTBUY_2019_10K",
+      "company": "Best Buy",
+      "gics_sector": "Consumer Discretionary",
+      "doc_type": "10k",
+      "doc_period": 2019,
+      "original_doc_link": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000764478/17bef9d1-6ef1-4a53-beb8-9c12b07a4a0e.pdf",
+      "path": "pdfs/BESTBUY_2019_10K.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/BESTBUY_2019_10K.pdf",
+      "sha256": "d3228e9acd2ce498b97a9d2cb99c2330b9a04687b7947908646d205b3eadf30d",
+      "bytes": 782117
+    },
+    {
+      "doc_name": "BESTBUY_2023_10K",
+      "company": "Best Buy",
+      "gics_sector": "Consumer Discretionary",
+      "doc_type": "10k",
+      "doc_period": 2023,
+      "original_doc_link": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000764478/a7d1c855-4d22-48e4-9d17-b5f5af923dbe.pdf",
+      "path": "pdfs/BESTBUY_2023_10K.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/BESTBUY_2023_10K.pdf",
+      "sha256": "7ca465d31a08be29e8c08d756644d33d818c7254a1215720f265227005cda696",
+      "bytes": 703034
+    },
+    {
+      "doc_name": "BESTBUY_2024Q2_10Q",
+      "company": "Best Buy",
+      "gics_sector": "Consumer Discretionary",
+      "doc_type": "10q",
+      "doc_period": 2024,
+      "original_doc_link": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000764478/5e179976-086d-4c3c-af0c-85fda4b35b9d.pdf",
+      "path": "pdfs/BESTBUY_2024Q2_10Q.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/BESTBUY_2024Q2_10Q.pdf",
+      "sha256": "cf9efb922bdd28d726d7e1605c5fa1f263dda72e033989e3bc9ee3a3bb356c03",
+      "bytes": 442386
+    },
+    {
+      "doc_name": "JPMORGAN_2021Q1_10Q",
+      "company": "JPMorgan",
+      "gics_sector": "Financials",
+      "doc_type": "10q",
+      "doc_period": 2021,
+      "original_doc_link": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2021/1st-quarter/1q21-10-q.pdf",
+      "path": "pdfs/JPMORGAN_2021Q1_10Q.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/JPMORGAN_2021Q1_10Q.pdf",
+      "sha256": "62518c05b02265dc13ca257d9ec0be0aec4449dad53db0c77d93444e7e2cfe97",
+      "bytes": 2285253
+    },
+    {
+      "doc_name": "JPMORGAN_2022Q2_10Q",
+      "company": "JPMorgan",
+      "gics_sector": "Financials",
+      "doc_type": "10q",
+      "doc_period": 2022,
+      "original_doc_link": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2022/2nd-quarter/corp-q2-2022.pdf",
+      "path": "pdfs/JPMORGAN_2022Q2_10Q.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/JPMORGAN_2022Q2_10Q.pdf",
+      "sha256": "7d715f552d4eeb6b2a1ea8ae02237b5767306907e761270ac23d74ac5b7e44b5",
+      "bytes": 2290421
+    },
+    {
+      "doc_name": "JPMORGAN_2022_10K",
+      "company": "JPMorgan",
+      "gics_sector": "Financials",
+      "doc_type": "10k",
+      "doc_period": 2022,
+      "original_doc_link": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2022/4th-quarter/corp-10k-2022.pdf",
+      "path": "pdfs/JPMORGAN_2022_10K.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/JPMORGAN_2022_10K.pdf",
+      "sha256": "c269899950f36edfa496e3c8447a51d86d0a206442a96dc24dcd9317d55b957c",
+      "bytes": 6947859
+    },
+    {
+      "doc_name": "JPMORGAN_2023Q2_10Q",
+      "company": "JPMorgan",
+      "gics_sector": "Financials",
+      "doc_type": "10q",
+      "doc_period": 2023,
+      "original_doc_link": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2023/2nd-quarter/CORP-Q2-2023.pdf",
+      "path": "pdfs/JPMORGAN_2023Q2_10Q.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/JPMORGAN_2023Q2_10Q.pdf",
+      "sha256": "eef2d9c1fdb5dc82be48166487a9e451c8544aec932a01fb06309ea7cd7122f5",
+      "bytes": 2573600
+    },
+    {
+      "doc_name": "PEPSICO_2021_10K",
+      "company": "PepsiCo",
+      "gics_sector": "Consumer Staples",
+      "doc_type": "10k",
+      "doc_period": 2021,
+      "original_doc_link": "https://pepsico.gcs-web.com/static-files/a5a1d988-8e28-4dc7-ac4e-e6a2abfd0310",
+      "path": "pdfs/PEPSICO_2021_10K.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/PEPSICO_2021_10K.pdf",
+      "sha256": "f2c7cf1969c7f6dfc8c0596824e1d6b3cc70f662ee2dd06be84bb27af5635364",
+      "bytes": 2139398
+    },
+    {
+      "doc_name": "PEPSICO_2022_10K",
+      "company": "PepsiCo",
+      "gics_sector": "Consumer Staples",
+      "doc_type": "10k",
+      "doc_period": 2022,
+      "original_doc_link": "https://pepsico.gcs-web.com/static-files/d051bdd6-c6d2-4814-826f-ece589b88d4c",
+      "path": "pdfs/PEPSICO_2022_10K.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/PEPSICO_2022_10K.pdf",
+      "sha256": "7d8a9f3374e429c58f101319e2da8a0e601a89859e1e4f6854163dd5f8ce6b47",
+      "bytes": 2993516
+    },
+    {
+      "doc_name": "PEPSICO_2023Q1_EARNINGS",
+      "company": "PepsiCo",
+      "gics_sector": "Consumer Staples",
+      "doc_type": "Earnings",
+      "doc_period": 2023,
+      "original_doc_link": "https://investors.pepsico.com/docs/default-source/investors/q1-2023/q1-2023-earnings-release_wfvmt94lzqbm92aw.pdf?sfvrsn=5db72450_4",
+      "path": "pdfs/PEPSICO_2023Q1_EARNINGS.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/PEPSICO_2023Q1_EARNINGS.pdf",
+      "sha256": "a705483ea6c548a2f67c421bc24ced391a6beb8487600b44b54e9ae2aca1f31c",
+      "bytes": 987394
+    },
+    {
+      "doc_name": "PEPSICO_2023_8K_dated-2023-05-05",
+      "company": "PepsiCo",
+      "gics_sector": "Consumer Staples",
+      "doc_type": "8k",
+      "doc_period": 2023,
+      "original_doc_link": "https://pepsico.gcs-web.com/static-files/718629be-2463-4b54-bba3-5e0e776e7d0c",
+      "path": "pdfs/PEPSICO_2023_8K_dated-2023-05-05.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/PEPSICO_2023_8K_dated-2023-05-05.pdf",
+      "sha256": "e8591d6f83d810a0f9edfc540a1a21aa6269a6de4c756b5eb808d5dbbea330ed",
+      "bytes": 102321
+    },
+    {
+      "doc_name": "PEPSICO_2023_8K_dated-2023-05-30",
+      "company": "PepsiCo",
+      "gics_sector": "Consumer Staples",
+      "doc_type": "8k",
+      "doc_period": 2023,
+      "original_doc_link": "https://pepsico.gcs-web.com/static-files/bcd1012b-77b8-4ac0-8b28-5e0a7c686f4e",
+      "path": "pdfs/PEPSICO_2023_8K_dated-2023-05-30.pdf",
+      "url": "https://raw.githubusercontent.com/patronus-ai/financebench/cc39aeb4afdf33909ee1412188bf89035950c2eb/pdfs/PEPSICO_2023_8K_dated-2023-05-30.pdf",
+      "sha256": "8e8f99f270b065e105636f54b2684f4c4170b3fc80845ae2f393bf66f3291d2c",
+      "bytes": 1460889
+    }
+  ]
+}

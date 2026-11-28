@@ -20,6 +20,7 @@ written to an audit table.
 | Embedding model (fastembed) | Tested on macOS with Python 3.12 (2026-11-27) |
 | Neon database | Tested: `check_setup.py` 9 of 9 checks, `pytest` 25 passed (2026-11-27) |
 | Neon environments | Tested: `check_setup.py` 9 of 9 on `development`, `pytest` 32 passed with database tests on `test` (2026-11-27) |
+| FinanceBench subset | Manifest for 5 companies, 39 questions, 17 PDFs; files verified by SHA-256 |
 | Ingestion of real filings | Not built yet |
 
 ## Setup
@@ -79,6 +80,29 @@ To ask a question with the agent, set `ANTHROPIC_API_KEY` in `.env`, then run:
 PYTHONPATH=src python -m finrag.agent "What was SampleCo revenue in 2099?"
 ```
 
+## Data
+
+The evaluation corpus is a subset of the FinanceBench open sample
+([patronus-ai/financebench](https://github.com/patronus-ai/financebench); paper:
+[arXiv 2311.11944](https://arxiv.org/abs/2311.11944)). The Hugging Face dataset card states
+the license CC-BY-NC-4.0, so the data is used here for non-commercial purposes only.
+See [ADR 0006](docs/adr/0006-financebench-subset.md).
+
+`manifests/financebench_subset.json` lists the files at a pinned commit with their SHA-256.
+Question text and PDFs are not committed. To download them to `data/financebench/`:
+
+```
+python scripts/financebench.py fetch
+```
+
+| Company | Questions | Documents |
+|---|---|---|
+| American Express | 7 | 1 |
+| JPMorgan | 5 | 4 |
+| PepsiCo | 11 | 5 |
+| 3M | 8 | 3 |
+| Best Buy | 8 | 4 |
+
 ## Development
 
 ```
@@ -114,6 +138,8 @@ Design decisions are recorded in `docs/adr/`.
 
 ## Next steps
 
-1. Load real filings: PDF parsing, table extraction, and XBRL facts.
-2. Add a cross-encoder reranker after the RRF step.
-3. Evaluate on the FinanceBench open sample (150 questions): PDF only, facts only, and combined.
+1. Load the 17 subset PDFs: parsing with page numbers, chunking, and embedding (step 3).
+2. Measure retrieval on the 39 subset questions: BM25, vector, and hybrid baselines (step 4).
+3. Load XBRL facts for the five companies (step 5).
+4. Add a cross-encoder reranker after the RRF step.
+5. Evaluate on all 150 FinanceBench questions: PDF only, facts only, and combined.
