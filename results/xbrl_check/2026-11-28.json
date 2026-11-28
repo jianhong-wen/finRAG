@@ -1,0 +1,89 @@
+{
+  "label_use": "FinanceBench answers are used only to score loaded facts.",
+  "tolerance": "1 percent relative (FinanceBench answers are rounded)",
+  "records": [
+    {
+      "question_id": "financebench_id_03029",
+      "company": "3M",
+      "fiscal_year": 2018,
+      "terms": [
+        [
+          "capex",
+          1
+        ]
+      ],
+      "computed": "1577.00",
+      "expected": "1577.00",
+      "missing": [],
+      "ok": true
+    },
+    {
+      "question_id": "financebench_id_04672",
+      "company": "3M",
+      "fiscal_year": 2018,
+      "terms": [
+        [
+          "ppe_net",
+          1
+        ]
+      ],
+      "computed": "8.74",
+      "expected": "8.70",
+      "missing": [],
+      "ok": true
+    },
+    {
+      "question_id": "financebench_id_04417",
+      "company": "Best Buy",
+      "fiscal_year": 2019,
+      "terms": [
+        [
+          "inventory",
+          1
+        ]
+      ],
+      "computed": "5409.00",
+      "expected": "5409.00",
+      "missing": [],
+      "ok": true
+    },
+    {
+      "question_id": "financebench_id_04980",
+      "company": "PepsiCo",
+      "fiscal_year": 2021,
+      "terms": [
+        [
+          "capex",
+          1
+        ]
+      ],
+      "computed": "4.62",
+      "expected": "4.60",
+      "missing": [],
+      "ok": true
+    },
+    {
+      "question_id": "financebench_id_03620",
+      "company": "PepsiCo",
+      "fiscal_year": 2022,
+      "terms": [
+        [
+          "operating_income",
+          1
+        ],
+        [
+          "depreciation_amortization",
+          1
+        ],
+        [
+          "capex",
+          -1
+        ]
+      ],
+      "computed": "9068.00",
+      "expected": "9068.00",
+      "missing": [],
+      "ok": true
+    }
+  ]
+}

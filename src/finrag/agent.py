@@ -16,6 +16,7 @@ from psycopg.types.json import Jsonb
 
 from .config import MAX_TOOL_ROUNDS, MODEL
 from .db import connect
+from .sec_facts import CONCEPT_NAMES
 from .tools import get_fact, search_filings
 
 SYSTEM = (
@@ -33,7 +34,8 @@ TOOLS: list[ToolParam] = [
     {
         "name": "get_fact",
         "description": (
-            "Look up a reported financial figure for one company and fiscal year. "
+            "Look up a figure reported in a 10-K (SEC XBRL data) for one company and "
+            "fiscal year. Values are in the reported unit, usually whole US dollars. "
             "If the concept is not found, the result lists the concepts that exist."
         ),
         "input_schema": {
@@ -42,7 +44,7 @@ TOOLS: list[ToolParam] = [
                 "company": {"type": "string"},
                 "concept": {
                     "type": "string",
-                    "description": "For example revenue, net_income, capex",
+                    "description": "One of: " + ", ".join(CONCEPT_NAMES),
                 },
                 "fiscal_year": {"type": "integer"},
             },

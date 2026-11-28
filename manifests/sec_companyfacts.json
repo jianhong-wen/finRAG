@@ -1,0 +1,55 @@
+{
+  "source": {
+    "api": "https://data.sec.gov/api/xbrl/companyfacts/",
+    "documentation": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+    "retrieved": "2026-11-28",
+    "note": "SEC data changes over time; this file records the snapshot that was loaded."
+  },
+  "companies": [
+    {
+      "company": "3M",
+      "cik": 66740,
+      "entity_name": "3M COMPANY",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000066740.json",
+      "path": "CIK0000066740.json",
+      "sha256": "f386e2155c94359b4e3f3a688c4b1d008d8082be0f87279cea40c15d6a04d209",
+      "bytes": 5302901
+    },
+    {
+      "company": "American Express",
+      "cik": 4962,
+      "entity_name": "AMERICAN EXPRESS CO",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000004962.json",
+      "path": "CIK0000004962.json",
+      "sha256": "e0f88341930d943f34039276fcd1ff8650219870001b035dc6e107e7f74d87a9",
+      "bytes": 4834968
+    },
+    {
+      "company": "Best Buy",
+      "cik": 764478,
+      "entity_name": "Best Buy Co., Inc.",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000764478.json",
+      "path": "CIK0000764478.json",
+      "sha256": "c9cd833d8edc99921ff5d5fb26d6b5b7ef2a2109ebbba7107fb1a4127c3c7149",
+      "bytes": 4053821
+    },
+    {
+      "company": "JPMorgan",
+      "cik": 19617,
+      "entity_name": "JPMORGAN CHASE & CO",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json",
+      "path": "CIK0000019617.json",
+      "sha256": "ff4aa16e6b5c23eceb15b4b630849c5c489935c636bec9b29efa8313136a4cc4",
+      "bytes": 8165935
+    },
+    {
+      "company": "PepsiCo",
+      "cik": 77476,
+      "entity_name": "PEPSICO INC",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000077476.json",
+      "path": "CIK0000077476.json",
+      "sha256": "a764921d09591614e55f734fd3e5f3532319c68fab9d691c61c17fc03b8a396b",
+      "bytes": 5006738
+    }
+  ]
+}
