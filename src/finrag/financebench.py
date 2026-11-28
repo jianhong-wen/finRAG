@@ -7,14 +7,14 @@ data/, which is never committed.
 
 import hashlib
 import json
-import os
-import tempfile
 import time
 from collections.abc import Callable, Iterable
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+
+from .fileio import write_atomic
 
 REPOSITORY = "patronus-ai/financebench"
 COMMIT = "cc39aeb4afdf33909ee1412188bf89035950c2eb"
@@ -125,19 +125,6 @@ def build_manifest(
 def manifest_files(manifest: Record) -> list[Record]:
     """Return every file entry of a manifest: metadata files first, then the PDFs."""
     return list(manifest["metadata_files"]) + list(manifest["documents"])
-
-
-def write_atomic(path: Path, data: bytes) -> None:
-    """Write data to path through a temporary file in the same folder, then replace."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    fd, tmp_name = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.", suffix=".tmp")
-    try:
-        with os.fdopen(fd, "wb") as handle:
-            handle.write(data)
-        os.replace(tmp_name, path)
-    except BaseException:
-        Path(tmp_name).unlink(missing_ok=True)
-        raise
 
 
 def fetch_url(

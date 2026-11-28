@@ -53,7 +53,9 @@ TOOLS: list[ToolParam] = [
         "name": "search_filings",
         "description": (
             "Search filing text. Use it for explanations, risks, definitions, "
-            "and figures that get_fact cannot return."
+            "and figures that get_fact cannot return. Always pass company and "
+            "fiscal_year when the question states them: results are far more precise "
+            "with both filters."
         ),
         "input_schema": {
             "type": "object",
