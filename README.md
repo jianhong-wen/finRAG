@@ -23,6 +23,7 @@ written to an audit table.
 | FinanceBench subset | Manifest for 5 companies, 39 questions, 17 PDFs; files verified by SHA-256 |
 | PDF ingestion (`scripts/ingest.py`) | 17 filings loaded into `development` (2026-11-27): 8,717 chunks; all 39 evidence pages of the subset have chunks; a second run skips all 17 |
 | Retrieval evaluation (`scripts/evaluate_retrieval.py`) | Baseline on 39 questions (2026-11-28); agent uses `vector` ([ADR 0009](docs/adr/0009-agent-retrieval-mode.md)) |
+| XBRL facts (`scripts/sec_facts.py`) | 84 10-K filings and 1,213 current-period facts loaded into `development` (2026-11-28); 5 of 5 checks against FinanceBench answers pass; a second load skips all filings |
 
 ## Setup
 
@@ -102,6 +103,24 @@ that never span two pages, embeds them, and skips filings whose PDF and pipeline
 unchanged ([ADR 0007](docs/adr/0007-pdf-parsing-and-chunking.md)). Writing to production
 needs `--target production` and `PRODUCTION_DATABASE_URL`.
 
+### SEC XBRL facts
+
+`get_fact` reads numbers taken from the SEC companyfacts API
+([ADR 0010](docs/adr/0010-sec-xbrl-facts.md)). Set `SEC_USER_AGENT` in `.env` (a name and a
+contact email, as the SEC asks), then:
+
+```
+python scripts/sec_facts.py fetch   # files to data/sec/, checked against the manifest
+python scripts/sec_facts.py load    # development branch
+python scripts/sec_facts.py check   # compares get_fact with five FinanceBench answers
+```
+
+Only the current-period values of each 10-K are stored; the values a 10-K repeats for
+earlier years are dropped. The fiscal year comes from the period end date, because the SEC
+`fy` field is the year of the filing and is sometimes wrong. 18 concepts are mapped from
+us-gaap tags (`finrag.sec_facts.CONCEPTS`). `manifests/sec_companyfacts.json` records the
+snapshot (date and SHA-256); `fetch --refresh` takes a new one.
+
 | Company | Questions | Documents |
 |---|---|---|
 | American Express | 7 | 1 |
@@ -131,6 +150,18 @@ differences of a few questions are not statistically significant. The right docu
 in the top 5 for over 90% of questions; the right page is the hard part. Reproduce with
 `python scripts/evaluate_retrieval.py` (reads the development branch only). See
 [ADR 0009](docs/adr/0009-agent-retrieval-mode.md).
+
+XBRL facts check (`results/xbrl_check/2026-11-28.json`). FinanceBench answers are used
+only for scoring; the five questions were chosen after reading the subset, so this verifies
+the loader rather than coverage on new questions.
+
+| Question | Company, year | Facts used | get_fact | FinanceBench |
+|---|---|---|---|---|
+| 03029 | 3M FY2018 | capex | 1,577.00 million | 1,577.00 |
+| 04672 | 3M FY2018 | ppe_net | 8.74 billion | 8.70 |
+| 04417 | Best Buy FY2019 | inventory | 5,409.00 million | 5,409.00 |
+| 04980 | PepsiCo FY2021 | capex | 4.62 billion | 4.60 |
+| 03620 | PepsiCo FY2022 | operating_income + depreciation_amortization - capex | 9,068.00 million | 9,068.00 |
 
 ## Development
 
@@ -167,6 +198,5 @@ Design decisions are recorded in `docs/adr/`.
 
 ## Next steps
 
-1. Load XBRL facts for the five companies (step 5).
-2. Add a cross-encoder reranker after the RRF step.
-3. Evaluate on all 150 FinanceBench questions: PDF only, facts only, and combined.
+1. Add a cross-encoder reranker after the RRF step.
+2. Evaluate on all 150 FinanceBench questions: PDF only, facts only, and combined.

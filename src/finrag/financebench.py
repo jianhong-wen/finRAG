@@ -133,6 +133,7 @@ def fetch_url(
     attempts: int = MAX_ATTEMPTS,
     opener: Callable[..., Any] = urlopen,
     sleep: Callable[[float], None] = time.sleep,
+    user_agent: str = USER_AGENT,
 ) -> bytes:
     """Download an https URL, retrying network and server errors with backoff.
 
@@ -140,7 +141,7 @@ def fetch_url(
     """
     if not url.startswith("https://"):
         raise ValueError(f"Only https URLs are allowed: {url}")
-    request = Request(url, headers={"User-Agent": USER_AGENT})  # noqa: S310 (https only)
+    request = Request(url, headers={"User-Agent": user_agent})  # noqa: S310 (https only)
     for attempt in range(1, attempts + 1):
         try:
             with opener(request, timeout=TIMEOUT_SECONDS) as response:

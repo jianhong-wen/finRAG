@@ -12,3 +12,6 @@ Add new entries at the bottom. Do not edit old entries; add a new entry that rep
 | 2026-11-27 | Pin direct dependencies to exact versions (`==`), taken from the tested Mac environment | Results must be reproducible; transitive dependencies are not locked yet | chore/code-standards |
 | 2026-11-27 | `mypy --strict`, ruff C90 (max complexity 10) and D101-D103 (docstrings); `exploration/` is exempt from docstrings | Enforce the code standards by tools instead of review | chore/code-standards |
 | 2026-11-27 | Synthetic sample data lives in `finrag.sample_data` and uses the invented alias tag `SampleCoTotalRevenue` | Cleanup deleted the alias of the real XBRL tag `Revenues` | chore/code-standards |
+| 2026-11-28 | Annual values are durations of 350 to 380 days | Covers calendar years and 52/53-week fiscal years (364 or 371 days) and excludes quarters | feat/xbrl-facts |
+| 2026-11-28 | `scripts/sec_facts.py check` accepts a 1 percent relative difference from FinanceBench answers | FinanceBench answers are rounded, for example 3M net PP&E 8,738 million is given as 8.70 billion | feat/xbrl-facts |
+| 2026-11-28 | SEC requests pause 0.5 seconds and read the contact from `SEC_USER_AGENT`; the script stops when it is not set | The SEC asks automated clients to identify themselves and to stay below ten requests per second | feat/xbrl-facts |

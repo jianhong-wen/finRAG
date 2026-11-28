@@ -83,3 +83,12 @@ def test_search_tool_asks_for_company_and_fiscal_year_filters():
     search = next(t for t in agent.TOOLS if t["name"] == "search_filings")
     assert "fiscal_year" in search["description"]
     assert "Every number in your answer must come from" in agent.SYSTEM
+
+
+def test_get_fact_description_lists_loaded_concepts():
+    from finrag.agent import TOOLS
+    from finrag.sec_facts import CONCEPT_NAMES
+
+    fact = next(t for t in TOOLS if t["name"] == "get_fact")
+    description = fact["input_schema"]["properties"]["concept"]["description"]
+    assert all(name in description for name in CONCEPT_NAMES)
