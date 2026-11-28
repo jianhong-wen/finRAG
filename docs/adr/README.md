@@ -36,3 +36,6 @@ and that the vector dimension in the schema, the config, and an accepted ADR agr
 | [0003](0003-fixed-sql-tools.md) | Fixed, parameterized SQL tools instead of model-written SQL | accepted | 2026-11-27 |
 | [0004](0004-neon-cli-config.md) | Manage the Neon project with the Neon CLI and neon.ts | accepted | 2026-11-27 |
 | [0005](0005-neon-environments.md) | Production, development and test as Neon branches | accepted | 2026-11-27 |
+| [0006](0006-financebench-subset.md) | FinanceBench subset from the GitHub repository at a pinned commit | accepted | 2026-11-27 |
+| [0007](0007-pdf-parsing-and-chunking.md) | PDF text with pypdfium2, page-bounded chunks, idempotent loading | accepted | 2026-11-27 |
+| [0008](0008-agent-runtime-and-llm-provider.md) | Own agent loop on the Anthropic SDK; AMD Radeon Cloud as the model provider | accepted | 2026-11-27 |

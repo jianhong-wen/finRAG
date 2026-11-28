@@ -9,6 +9,7 @@ in one PostgreSQL + pgvector database. See README.md for setup.
 - `scripts/`: command-line entry points.
 - `tests/`: pytest tests. Database tests use synthetic data only (company "SampleCo", fiscal year 2099).
 - `docs/adr/`: architecture decision records.
+- `manifests/`: data manifests (ids, links, SHA-256). Downloaded files go to `data/`, never committed.
 
 ## Commands
 - Install: `pip install -r requirements-dev.txt` (Python 3.12 or later)

@@ -6,6 +6,7 @@ Its retrieval quality is not meaningful.
 """
 
 import hashlib
+import math
 import re
 from typing import Any
 
@@ -15,6 +16,9 @@ import numpy.typing as npt
 from .config import EMBED_BACKEND, EMBED_DIM
 
 Vector = npt.NDArray[np.float32]
+EMBED_MODEL = "BAAI/bge-small-en-v1.5"
+MODEL_MAX_TOKENS = 512
+SPECIAL_TOKENS = 2  # [CLS] and [SEP]
 
 _model: Any = None  # fastembed ships no type hints
 
@@ -24,7 +28,7 @@ def _fastembed_model() -> Any:
     if _model is None:
         from fastembed import TextEmbedding
 
-        _model = TextEmbedding("BAAI/bge-small-en-v1.5")
+        _model = TextEmbedding(EMBED_MODEL)
     return _model
 
 
@@ -49,3 +53,24 @@ def embed_query(text: str) -> Vector:
     if EMBED_BACKEND == "hash":
         return _hash_vector(text)
     return np.asarray(next(iter(_fastembed_model().query_embed(text))), dtype=np.float32)
+
+
+def estimate_tokens(text: str) -> int:
+    """Estimate word-piece tokens without a tokenizer, erring on the high side.
+
+    Each punctuation mark counts as one token and each run of letters or digits as one
+    token per four characters, as a WordPiece tokenizer splits numbers like "(1,577)".
+    """
+    pieces = re.findall(r"[A-Za-z]+|\d+|[^\w\s]", text)
+    return sum(math.ceil(len(p) / 4) if p.isalnum() else 1 for p in pieces)
+
+
+def count_tokens(text: str) -> int:
+    """Return the number of model tokens in text, without the two special tokens.
+
+    The hash backend uses estimate_tokens. The fastembed count stops at the model limit
+    (512 tokens) because its tokenizer truncates.
+    """
+    if EMBED_BACKEND == "hash":
+        return estimate_tokens(text)
+    return max(0, int(_fastembed_model().token_count(text)) - SPECIAL_TOKENS)
