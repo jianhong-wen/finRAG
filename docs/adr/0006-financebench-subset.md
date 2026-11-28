@@ -16,8 +16,9 @@ The GitHub repository has no license file.
 - Download the questions, the document metadata and the PDFs from the GitHub repository at
   commit `cc39aeb4afdf33909ee1412188bf89035950c2eb`, not from the original links.
 - Start with five companies: American Express, JPMorgan, PepsiCo, 3M and Best Buy
-  (39 questions, 17 documents). Two are financial companies, close to the target employer's
-  domain; the others give a range of sectors and question types.
+  (39 questions, 17 documents). Two are financial companies (a card issuer and a bank),
+  whose filings have finance-specific structure; the others give a range of sectors and
+  question types.
 - Commit only `manifests/financebench_subset.json`: question ids and types, document
   metadata, the original link, the pinned URL, the SHA-256 and the size of every file, and
   the UTC date of retrieval. Question text and PDFs stay in `data/`, which is not committed.
