@@ -21,7 +21,7 @@ written to an audit table.
 | Neon database | Tested: `check_setup.py` 9 of 9 checks, `pytest` 25 passed (2026-11-27) |
 | Neon environments | Tested: `check_setup.py` 9 of 9 on `development`, `pytest` 32 passed with database tests on `test` (2026-11-27) |
 | FinanceBench subset | Manifest for 5 companies, 39 questions, 17 PDFs; files verified by SHA-256 |
-| PDF ingestion (`scripts/ingest.py`) | Built and tested with synthetic PDFs; not yet run on the 17 filings |
+| PDF ingestion (`scripts/ingest.py`) | 17 filings loaded into `development` (2026-11-27): 8,717 chunks; all 39 evidence pages of the subset have chunks; a second run skips all 17 |
 
 ## Setup
 
